@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hugo Nicolas Pulido Moreno — CV</title>
+  <!-- Google Font import -->
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    /* ── CSS Custom Properties ── */
+    :root {
+      --blue:         #2c4a9e;   /* hex color */
+      --blue-light:   #4a6fc4;
+      --blue-pale:    #dde5f7;
+      --dark:         #1a1a2e;
+      --text:         #2d2d2d;
+      --muted:        #666677;
+      --border:       #c8cedf;
+      --sidebar-bg:   #f4f6fb;   /* div background color */
+      --white:        #ffffff;
+      --accent:       #e8b84b;
+      --radius:       0px;
+      --font-display: 'Raleway', sans-serif;  /* imported Google font */
+      --font-body:    'Lora', Georgia, serif;
+    }
+
+    /* ── Reset & Base — inheritance source ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);   /* inherited by all children */
+      font-size: 14px;                 /* inherited */
+      color: var(--text);              /* inherited */
+      background: #e2e6ef;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem 1rem 4rem;
+    }
+
+    /* ── Page card ── */
+    .cv {
+      width: 900px;
+      max-width: 100%;
+      background: var(--white);
+      box-shadow: 0 20px 60px rgba(0,0,0,.18);
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    /* ════════════════════════════════
+       HEADER BANNER
+    ════════════════════════════════ */
+    .header {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+    }
+
+    .header-photo {
+      background: #b8c4d8;
+      overflow: hidden;
+      min-height: 220px;
+    }
+
+    /* CSS image size modification */
+    .header-photo img {
+      width: 220px;    /* modified image size */
+      height: 220px;   /* modified image size */
+      object-fit: cover;
+      display: block;
+      filter: grayscale(8%);
+    }
+
+    /* SVG fallback portrait */
+    .header-photo .avatar-svg {
+      width: 220px;
+      height: 220px;
+      display: block;
+    }
+
+    .header-title {
+      background: var(--white);
+      padding: 2.4rem 2.6rem 1.6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-bottom: 4px solid var(--blue);  /* border around element */
+    }
+
+    .header-title h1 {
+      font-family: var(--font-display);
+      font-size: 3rem;          /* changed font size */
+      font-weight: 900;
+      line-height: 1;
+      color: var(--blue);       /* changed text color */
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .header-title h2 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;       /* changed font size */
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-top: .5rem;
+    }
+
+    /* ════════════════════════════════
+       TWO-COLUMN BODY
+    ════════════════════════════════ */
+    .body {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+    }
+
+    /* ── LEFT SIDEBAR ── */
+    .sidebar {
+      background-color: var(--sidebar-bg);   /* div background color */
+      border-right: 1px solid var(--border); /* border on element */
+      padding: 2rem 1.4rem;
+    }
+
+    .sidebar-section { margin-bottom: 2rem; }
+
+    .sidebar-section h3 {
+      font-family: var(--font-display);
+      font-size: .72rem;        /* changed font size */
+      font-weight: 700;
+      color: var(--blue);       /* changed text color */
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      padding-bottom: .4rem;
+      border-bottom: 2px solid var(--blue);   /* border on heading */
+      margin-bottom: .9rem;
+    }
+
+    /* Contact items */
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: .5rem;
+      margin-bottom: .55rem;
+      font-size: .82rem;
+    }
+
+    .contact-item .icon {
+      color: var(--blue);
+      font-size: .9rem;
+      flex-shrink: 0;
+      margin-top: .05rem;
+    }
+
+    .contact-item span { color: var(--text); word-break: break-word; }
+
+    /* Language bars */
+    .lang-item { margin-bottom: .8rem; }
+
+    .lang-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: .82rem;
+      margin-bottom: .3rem;
+    }
+
+    .lang-name { font-weight: 600; color: var(--dark); }
+    .lang-pct  { color: var(--blue); font-weight: 700; }
+
+    .lang-bar {
+      height: 5px;
+      background: var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid var(--blue-pale);   /* border on bar track */
+    }
+
+    .lang-fill {
+      height: 100%;
+      background: var(--blue);
+      border-radius: 999px;
+      animation: grow .9s ease forwards;
+    }
+    @keyframes grow { from { width: 0 !important; } }
+
+    /* Skill tags in sidebar */
+    .skill-tag {
+      display: inline-block;
+      background-color: var(--blue-pale);   /* div/element bg */
+      color: var(--blue);                   /* changed text color */
+      border: 1px solid var(--blue-light);  /* border on tag */
+      border-radius: 3px;
+      font-family: var(--font-display);
+      font-size: .75rem;
+      font-weight: 700;
+      padding: .25rem .55rem;
+      margin: .2rem .15rem .2rem 0;
+      letter-spacing: .04em;
+    }
+
+    /* Software items */
+    .sw-item { margin-bottom: .7rem; }
+
+    .sw-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: .8rem;
+      margin-bottom: .28rem;
+    }
+
+    .sw-name { font-weight: 600; color: var(--dark); }
+    .sw-pct  { color: var(--blue); font-weight: 700; font-size: .78rem; }
+
+    .sw-bar {
+      height: 4px;
+      background: var(--border);
+      border-radius: 999px;
+    }
+
+    .sw-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue) 0%, var(--blue-light) 100%);
+      border-radius: 999px;
+      animation: grow .9s ease forwards;
+    }
+
+    /* ── RIGHT MAIN ── */
+    .main {
+      padding: 2rem 2.4rem;
+    }
+
+    .main-section { margin-bottom: 2rem; }
+
+    .main-section h3 {
+      font-family: var(--font-display);
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      padding-bottom: .4rem;
+      border-bottom: 2px solid var(--blue);   /* border on element */
+      margin-bottom: 1rem;
+    }
+
+    /* Profile text */
+    .profile-text {
+      font-size: .9rem;
+      line-height: 1.75;
+      color: var(--text);   /* inherited but explicit */
+    }
+
+    /* Timeline entries */
+    .timeline-entry {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: .6rem 1rem;
+      margin-bottom: 1.2rem;
+      position: relative;
+    }
+
+    .tl-year {
+      font-family: var(--font-display);
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--blue);
+      text-align: right;
+      padding-top: .15rem;
+      line-height: 1.3;
+    }
+
+    .tl-body { border-left: 2px solid var(--blue-pale); padding-left: .9rem; }
+
+    .tl-body h4 {
+      font-family: var(--font-display);
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .tl-body .tl-sub {
+      font-size: .8rem;
+      color: var(--blue);
+      font-weight: 600;
+      margin-bottom: .2rem;
+    }
+
+    .tl-body p {
+      font-size: .83rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .15rem .55rem;
+      border-radius: 2px;
+      margin-top: .25rem;
+    }
+
+    .badge-current {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .badge-done {
+      background: var(--blue-pale);
+      color: var(--blue);
+      border: 1px solid var(--blue-light);
+    }
+
+    /* Goals */
+    .goals-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .8rem;
+    }
+
+    .goal-card {
+      background-color: var(--sidebar-bg);   /* div background color */
+      border: 1px solid var(--border);       /* border on element */
+      border-top: 3px solid var(--blue);
+      border-radius: 4px;
+      padding: .85rem .9rem;
+    }
+
+    .goal-card h5 {
+      font-family: var(--font-display);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: .4rem;
+    }
+
+    .goal-card p {
+      font-size: .8rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* References */
+    .ref-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .8rem;
+    }
+
+    .ref-card {
+      background-color: var(--white);
+      border: 1px solid var(--border);    /* border on element */
+      border-left: 3px solid var(--blue);
+      border-radius: 3px;
+      padding: .8rem 1rem;
+    }
+
+    .ref-card h4 {
+      font-family: var(--font-display);
+      font-size: .88rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .ref-card .ref-role {
+      font-size: .75rem;
+      color: var(--blue);
+      margin-bottom: .3rem;
+      font-weight: 600;
+    }
+
+    .ref-card p {
+      font-size: .78rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* Interest tags */
+    .interest-tag {
+      display: inline-block;
+      background: var(--white);
+      border: 1px solid var(--blue);
+      color: var(--blue);
+      font-family: var(--font-display);
+      font-size: .73rem;
+      font-weight: 600;
+      padding: .25rem .65rem;
+      border-radius: 999px;
+      margin: .2rem .15rem .2rem 0;
+      letter-spacing: .03em;
+    }
+
+    /* Footer strip */
+    .cv-footer {
+      grid-column: 1 / -1;
+      background: var(--blue);
+      color: #ffffff99;
+      font-family: var(--font-display);
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-align: center;
+      padding: .7rem;
+      text-transform: uppercase;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 700px) {
+      .header, .body { grid-template-columns: 1fr; }
+      .header-photo img, .header-photo .avatar-svg { width: 100%; height: 200px; }
+      .header-title h1 { font-size: 2rem; }
+      .goals-grid { grid-template-columns: 1fr; }
+      .ref-grid { grid-template-columns: 1fr; }
+      .timeline-entry { grid-template-columns: 80px 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="cv">
+
+  <!-- ══ HEADER ══ -->
+  <div class="header">
+    <div class="header-photo">
+      <!-- Profile photo placeholder (replace src with real photo) -->
+      <svg class="avatar-svg" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+        <rect width="220" height="220" fill="#b8c4d8"/>
+        <circle cx="110" cy="85" r="45" fill="#7a94bb"/>
+        <ellipse cx="110" cy="195" rx="70" ry="50" fill="#7a94bb"/>
+      </svg>
+    </div>
+    <div class="header-title">
+      <h1>Pulido Moreno<br/>Hugo Nicolas</h1>
+      <h2>Computer Engineering Student</h2>
+    </div>
+  </div>
+
+  <!-- ══ BODY ══ -->
+  <div class="body">
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar">
+
+      <!-- Contact -->
+      <div class="sidebar-section">
+        <h3>Contact</h3>
+        <div class="contact-item">
+          <span class="icon">📞</span>
+          <span>332-989-6683</span>
+        </div>
+        <div class="contact-item">
+          <span class="icon">✉️</span>
+          <span>Hugonicolas783@gmail.com</span>
+        </div>
+        <div class="contact-item">
+          <span class="icon">📍</span>
+          <span>Guadalajara, Jalisco, México</span>
+        </div>
+        <div class="contact-item">
+          <span class="icon">🎂</span>
+          <span>Age: 20 years</span>
+        </div>
+        <div class="contact-item">
+          <span class="icon">🌍</span>
+          <span>Nationality: Mexican</span>
+        </div>
+        <div class="contact-item">
+          <span class="icon">💼</span>
+          <span>linkedin.com/in/hugopulido</span>
+        </div>
+        <div class="contact-item">
+          <span class="icon">🐙</span>
+          <span>github.com/chacho416</span>
+        </div>
+      </div>
+
+      <!-- Languages -->
+      <div class="sidebar-section">
+        <h3>Languages</h3>
+        <div class="lang-item">
+          <div class="lang-top">
+            <span class="lang-name">Spanish</span>
+            <span class="lang-pct">100%</span>
+          </div>
+          <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-top">
+            <span class="lang-name">English</span>
+            <span class="lang-pct">35%</span>
+          </div>
+          <div class="lang-bar"><div class="lang-fill" style="width:65%"></div></div>
+        </div>
+      </div>
+
+      <!-- Technical Skills -->
+      <div class="sidebar-section">
+        <h3>Skills</h3>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">HTML / CSS</span>
+        <span class="skill-tag">VHDL</span>
+        <span class="skill-tag">Front-End Dev</span>
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">SQL</span>
+      </div>
+
+      <!-- Software -->
+      <div class="sidebar-section">
+        <h3>Software</h3>
+        <div class="sw-item">
+          <div class="sw-top"><span class="sw-name">VS Code</span><span class="sw-pct">90%</span></div>
+          <div class="sw-bar"><div class="sw-fill" style="width:90%"></div></div>
+        </div>
+        <div class="sw-item">
+          <div class="sw-top"><span class="sw-name">Python / Jupyter</span><span class="sw-pct">80%</span></div>
+          <div class="sw-bar"><div class="sw-fill" style="width:80%"></div></div>
+        </div>
+        <div class="sw-item">
+          <div class="sw-top"><span class="sw-name">Quartus (VHDL)</span><span class="sw-pct">70%</span></div>
+          <div class="sw-bar"><div class="sw-fill" style="width:70%"></div></div>
+        </div>
+        <div class="sw-item">
+          <div class="sw-top"><span class="sw-name">Git / GitHub</span><span class="sw-pct">75%</span></div>
+          <div class="sw-bar"><div class="sw-fill" style="width:75%"></div></div>
+        </div>
+        <div class="sw-item">
+          <div class="sw-top"><span class="sw-name">Microsoft Office</span><span class="sw-pct">85%</span></div>
+          <div class="sw-bar"><div class="sw-fill" style="width:85%"></div></div>
+        </div>
+        <div class="sw-item">
+          <div class="sw-top"><span class="sw-name">Linux / Terminal</span><span class="sw-pct">65%</span></div>
+          <div class="sw-bar"><div class="sw-fill" style="width:65%"></div></div>
+        </div>
+      </div>
+
+      <!-- Interests -->
+      <div class="sidebar-section">
+        <h3>Interests</h3>
+        <span class="interest-tag">Technology</span>
+        <span class="interest-tag">AI & ML</span>
+        <span class="interest-tag">Robotics</span>
+        <span class="interest-tag">Cybersecurity</span>
+        <span class="interest-tag">Open Source</span>
+        <span class="interest-tag">Electronics</span>
+        <span class="interest-tag">Video Games</span>
+      </div>
+
+    </aside>
+
+    <!-- ── MAIN CONTENT ── -->
+    <main class="main">
+
+      <!-- Profile -->
+      <div class="main-section">
+        <h3>Profile</h3>
+        <p class="profile-text">
+          My name is Hugo Nicolas Pulido Moreno. I am a computer technician and currently pursuing a Bachelor's degree in Computer Engineering at the University of Guadalajara. I am passionate about technology and driven by continuous learning. In a professional environment, I aim to give my best to contribute to company growth while acquiring new skills and improving my teamwork and technical capabilities every day.
+        </p>
+      </div>
+
+      <!-- Education -->
+      <div class="main-section">
+        <h3>Education</h3>
+
+        <div class="timeline-entry">
+          <div class="tl-year">2010 – 2016</div>
+          <div class="tl-body">
+            <h4>Primary &amp; Secondary School</h4>
+            <div class="tl-sub">Instituto Cristóbal Colón · Escuinapa, Sinaloa</div>
+            <p>Completed elementary and middle school education with a focus on foundational sciences and mathematics.</p>
+            <span class="badge badge-done">Graduated</span>
+          </div>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="tl-year">2016 – 2019</div>
+          <div class="tl-body">
+            <h4>Technical Degree in IT (Técnico en Informática)</h4>
+            <div class="tl-sub">CONALEP · Escuinapa, Sinaloa</div>
+            <p>Studied computer maintenance, basic networking, programming fundamentals, and office productivity tools. Gained hands-on experience in hardware and software support.</p>
+            <span class="badge badge-done">Graduated</span>
+          </div>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="tl-year">2022 – Present</div>
+          <div class="tl-body">
+            <h4>B.Sc. in Computer Engineering (Ingeniería en Computación)</h4>
+            <div class="tl-sub">Universidad de Guadalajara (UdeG) · CUCEI</div>
+            <p>Coursework includes algorithms, data structures, digital systems with VHDL, computer architecture, operating systems, and web development. Currently in 4th semester.</p>
+            <span class="badge badge-current">In Progress</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Work Experience -->
+      <div class="main-section">
+        <h3>Work Experience</h3>
+
+        <div class="timeline-entry">
+          <div class="tl-year">2022 – 2023</div>
+          <div class="tl-body">
+            <h4>IT Support Technician (Part-time)</h4>
+            <div class="tl-sub">Practice · Escuinapa, Sinaloa</div>
+            <p>I performed preventive and corrective maintenance on computer equipment in laboratories and classrooms, ensuring that the devices were available and functioning optimally for students and faculty.</p>
+          </div>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="tl-year">2023</div>
+          <div class="tl-body">
+            <h4>microprocessor competition congress</h4>
+            <div class="tl-sub">UdeG CUCEI  · Guadalajara, Jalisco</div>
+            <p> Designed and presented an 8-bit microprocessor architecture optimized for cryptography using Logisim. Competed in a rigorous academic environment and demonstrated hardware-level security concepts to a panel of judges.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Projects -->
+      <div class="main-section">
+        <h3>Project Experience</h3>
+
+        <div class="timeline-entry">
+          <div class="tl-year">2023</div>
+          <div class="tl-body">
+            <h4>Pizzeria sales system</h4>
+            <div class="tl-sub">Academic Project · Java</div>
+            <p> Design and development of an integrated point of sale (POS) and order management system for a pizzeria, optimizing customer service times and streamlining the cash register workflow.</p>
+          </div>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="tl-year">2024</div>
+          <div class="tl-body">
+            <h4>Website of a butcher shop</h4>
+            <div class="tl-sub">Academic Project · HTML / CSS / php / MySQL / JavaScript</div>
+            <p> Development of a responsive web platform for a local butcher shop, integrating an interactive digital catalog focused on improving the user experience (UX/UI) and the digital presence of the business.</p>
+          </div>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="tl-year">2026</div>
+          <div class="tl-body">
+            <h4>Avocado Disease Detection Scanner</h4>
+            <div class="tl-sub">Team Project · HTML / Python / .bat / Arduino</div>
+            <p> Design and implementation of an automated scanning system utilizing Arduino for hardware control and Python for computer vision. Developed HTML web interfaces and streamlined operational workflows with .bat scripts to capture images and accurately detect defects and diseases in avocados.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Professional Goals -->
+      <div class="main-section">
+        <h3>Professional Goals</h3>
+        <div class="goals-grid">
+          <div class="goal-card">
+            <h5>Short Term</h5>
+            <p>Deepen technical knowledge both at university and in professional settings. Earn internship experience in software development or IT.</p>
+          </div>
+          <div class="goal-card">
+            <h5>Mid Term</h5>
+            <p>Graduate with a Computer Engineering degree and secure a full-time role, applying everything learned in academics and real-world projects.</p>
+          </div>
+          <div class="goal-card">
+            <h5>Long Term</h5>
+            <p>Grow into a senior technical role, becoming a reference for the team and helping junior engineers develop their skills and careers.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- References -->
+      <div class="main-section">
+        <h3>Personal References</h3>
+        <div class="ref-grid">
+          <div class="ref-card">
+            <h4>Ing. Izhak Emmanuel Avila</h4>
+            <div class="ref-role">Professor of Digital Systems · UdeG CUCEI</div>
+            <p>"Hugo demonstrates genuine initiative and solid technical understanding in digital systems. He is disciplined, curious, and a reliable team member."</p>
+            <p style="margin-top:.4rem; color:#2c4a9e; font-size:.75rem;">📞 333-000-1111 · mrodriguez@cucei.udg.mx</p>
+          </div>
+          <div class="ref-card">
+            <h4>Ing. Carlos Oceguera</h4>
+            <div class="ref-role">IT Coordinator · Conalep Escuinapa</div>
+            <p>"I have known Hugo since his early years. He is a hard-working and responsible young man with a clear passion for technology and learning."</p>
+            <p style="margin-top:.4rem; color:#2c4a9e; font-size:.75rem;">📞 333-000-2222 · cvazquez@colon.edu.mx</p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <div class="cv-footer">Hugo Nicolas Pulido Moreno · Computer Engineering · University of Guadalajara · 2025</div>
+</div>
+</body>
+</html>
